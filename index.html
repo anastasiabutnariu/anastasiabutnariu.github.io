@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anastasia Butnariu — Mechanical Engineering Portfolio</title>
+  <meta name="description" content="Anastasia Butnariu, Mechanical Engineering student at the University of Toronto: aerospace, rocketry and life-support systems projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --surface: #171a21;
+      --border: #262b36;
+      --text: #e6e8ec;
+      --muted: #9aa3b2;
+      --accent: #f2a541;      /* change this to re-theme the whole site */
+      --radius: 10px;
+      --max: 980px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafaf8;
+        --surface: #ffffff;
+        --border: #e3e5e8;
+        --text: #16181d;
+        --muted: #5b6372;
+        --accent: #c76a00;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    nav .logo { font-weight: 600; color: var(--text); }
+    nav ul { display: flex; gap: 22px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 14px; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero { padding: 110px 0 80px; }
+    .hero .tag { color: var(--accent); font-size: 14px; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+    .hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin-top: 20px; }
+    .btns { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 11px 20px; border-radius: var(--radius);
+      font-weight: 500; font-size: 15px; border: 1px solid var(--border); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+
+    /* Sections */
+    section { padding: 70px 0; border-top: 1px solid var(--border); }
+    .label { color: var(--accent); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    h2 { font-size: 30px; letter-spacing: -0.01em; margin-bottom: 28px; }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; }
+    .about p { color: var(--muted); margin-bottom: 14px; }
+    .facts { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; font-size: 14px; }
+    .facts div { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+    .facts div:last-child { border-bottom: none; }
+    .facts span:first-child { color: var(--muted); }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card .thumb {
+      aspect-ratio: 16/9; background: var(--border); display: grid; place-items: center;
+      color: var(--muted); font-size: 13px; object-fit: cover; width: 100%;
+    }
+    .card .body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .card h3 { font-size: 18px; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 15px; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+    .tags span { font-size: 12px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); }
+    .card .links { display: flex; gap: 16px; font-size: 14px; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .skills div { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .skills h4 { font-size: 15px; margin-bottom: 10px; }
+    .skills ul { list-style: none; color: var(--muted); font-size: 14px; }
+    .skills li { padding: 3px 0; }
+    .skills li::before { content: "▹ "; color: var(--accent); }
+
+    /* Experience timeline */
+    .timeline { border-left: 2px solid var(--border); padding-left: 26px; }
+    .job { position: relative; margin-bottom: 36px; }
+    .job::before {
+      content: ""; position: absolute; left: -33px; top: 7px; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--accent);
+    }
+    .job .when { color: var(--muted); font-size: 13px; }
+    .job h3 { font-size: 18px; }
+    .job h3 span { color: var(--muted); font-weight: 400; }
+    .job ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 15px; }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 26px; }
+    .contact .btns { justify-content: center; }
+
+    .card .thumb.t1 { background: linear-gradient(135deg, #8a3b1e, #d9774a); color: #fff; }
+    .card .thumb.t2 { background: linear-gradient(135deg, #1e4d6b, #4fa3c7); color: #fff; }
+    .card .thumb.t3 { background: linear-gradient(135deg, #2b2f3a, #5b6478); color: #fff; }
+    .card .thumb.t4 { background: linear-gradient(135deg, #3d5a2a, #8fb069); color: #fff; }
+    .card .meta { flex: none; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .card ul { color: var(--muted); font-size: 14.5px; margin-left: 18px; flex: 1; }
+    .card li { margin-bottom: 5px; }
+    .certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 36px; }
+    .certs div { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; font-size: 14px; }
+    .certs strong { display: block; }
+    .certs span { color: var(--muted); font-size: 13px; }
+    .sub { font-size: 20px; margin: 44px 0 20px; }
+    footer { text-align: center; padding: 30px 0 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 720px) {
+      nav ul { display: none; }
+      .about { grid-template-columns: 1fr; }
+      .hero { padding: 70px 0 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo mono">anastasia<span style="color:var(--accent)">.</span>butnariu</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="tag mono">// Mechanical Engineering · University of Toronto</p>
+      <h1>Hi, I'm Anastasia.<br />I design for rockets, Mars and machines.</h1>
+      <p>Mechanical Engineering + Co-op student at U of T. I work on high-power rocketry, life-support systems for a crewed Mars base, and simulation code for plastic-degrading enzymes, and I restore motorcycles on the side.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="resume.pdf" target="_blank">Résumé</a>
+        <a class="btn" href="mailto:anastasia.butnariu@mail.utoronto.ca">Email me</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <p class="label mono">01 · About</p>
+      <h2>About me</h2>
+      <div class="about">
+        <div>
+          <p>I'm a second-year Mechanical Engineering student at the University of Toronto, drawn to aerospace and to engineering problems where people's lives depend on the design: rockets, spacecraft, and the systems that keep a crew alive on another planet.</p>
+          <p>On campus I lead the life systems subteam on a Mars base camp design, build and fly high-power rockets with UofTSTAR, and co-founded U of T's AIAA chapter. I also like making engineering more accessible. I'm the Engineering Society's first Academic Resources Director, and I've organized aerospace conferences for high school and university students.</p>
+          <p>I'm looking for co-op and internship roles in aerospace and mechanical design.</p>
+        </div>
+        <div class="facts mono">
+          <div><span>Location</span><span>Toronto, ON</span></div>
+          <div><span>School</span><span>University of Toronto</span></div>
+          <div><span>Program</span><span>BASc MechE + Co-op</span></div>
+          <div><span>Grad</span><span>April 2029</span></div>
+          <div><span>Languages</span><span>EN · FR · RO</span></div>
+          <div><span>Status</span><span style="color:var(--accent)">Open to co-op</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="label mono">02 · Projects</p>
+      <h2>Selected projects</h2>
+      <div class="projects">
+
+        <!-- To use a photo, replace a thumb div with: <img class="thumb" src="images/mars.jpg" alt="Mars base camp"> -->
+        <article class="card">
+          <div class="thumb t1 mono">Human Mars Initial Base Camp</div>
+          <div class="body">
+            <h3>Life Systems for a Mars Base Camp</h3>
+            <p class="meta mono">BioChem Engineering Lead · U of T Interplanetary Space Exploration Team · 2026–27</p>
+            <ul>
+              <li>Leading the subteam that designs food, water and air systems for a 4-crew, 30-sol base camp, working from the AIAA Undergraduate Team Space Design brief.</li>
+              <li>Built a consumables budget from NASA data, sizing about 1 t of stored food, water and oxygen.</li>
+              <li>Showed that ISS-style water recycling cuts stored water from 514 kg to about 10 kg.</li>
+              <li>Set requirements for a deployable greenhouse by scaling designs from Antarctic, Arctic and Mars-analog stations.</li>
+            </ul>
+            <div class="tags"><span>Systems engineering</span><span>Trade studies</span><span>Excel</span><span>Arduino</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb t2 mono">PETabite · iGEM Toronto</div>
+          <div class="body">
+            <h3>Polymer Diffusion Simulation</h3>
+            <p class="meta mono">Dry Lab &amp; Literature Review · iGEM Toronto · 2026–present</p>
+            <ul>
+              <li>Built a Python pipeline that combines RDKit with the Piringer and Crank diffusion models to predict how small molecules diffuse into polymers.</li>
+              <li>Wrote data-scraping workflows that pull experimental data out of scientific papers and structure it for a large literature review.</li>
+              <li>Supported computational work for AI-assisted discovery of plastic-degrading enzymes.</li>
+            </ul>
+            <div class="tags"><span>Python</span><span>RDKit</span><span>Data scraping</span><span>Modelling</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb t3 mono">UofTSTAR · Aero/Mech</div>
+          <div class="body">
+            <h3>High-Power Rocketry</h3>
+            <p class="meta mono">Aero/Mech Member · UofTSTAR · 2025–present</p>
+            <ul>
+              <li>Designed and assembled a rocket flight computer with sensors and flight data logging.</li>
+              <li>Designed and 3D-printed rocket components in Fusion 360.</li>
+              <li>Modelled flight performance in OpenRocket to guide vehicle design and launch prep.</li>
+              <li>Flew three high-power rockets and earned Level 1 HPR certification.</li>
+            </ul>
+            <div class="tags"><span>Fusion 360</span><span>OpenRocket</span><span>Embedded</span><span>3D printing</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb t4 mono">1989 Yamaha Virago</div>
+          <div class="body">
+            <h3>Motorcycle Restoration</h3>
+            <p class="meta mono">Personal project · Dec 2025 – Feb 2026</p>
+            <ul>
+              <li>Brought a non-running 1989 Yamaha Virago back to working condition.</li>
+              <li>Rebuilt the carburetor, serviced the brake system and replaced the fluids.</li>
+              <li>Tracked down performance problems using diagnostic techniques and service documentation.</li>
+            </ul>
+            <div class="tags"><span>Diagnostics</span><span>Carburetors</span><span>Brakes</span><span>Hands-on</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="label mono">03 · Experience</p>
+      <h2>Experience &amp; leadership</h2>
+      <div class="timeline">
+        <div class="job">
+          <p class="when mono">Sep 2025 — Present</p>
+          <h3>Co-chair, AIAA U of T Chapter <span>@ UofTSTAR</span></h3>
+          <ul>
+            <li>Co-founded U of T's AIAA chapter and lead its external strategy, industry outreach and aerospace programming.</li>
+            <li>Bring aerospace professionals and organizations together with U of T students as Outreach Executive.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <p class="when mono">Mar 2026 — Present</p>
+          <h3>Academic Resources Director <span>@ Engineering Society, U of T</span></h3>
+          <ul>
+            <li>First person to hold this new position. I lead a team of 6.</li>
+            <li>Defined the role by finding gaps in academic support and creating structured resources to fill them.</li>
+            <li>Built a twice-yearly training module for new tutors in the faculty's official tutoring program.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <p class="when mono">Aug 2026 — Sep 2026</p>
+          <h3>Organizer <span>@ AIAA U of T × TMU Kickoff Conference</span></h3>
+          <ul>
+            <li>Co-organized an inter-university aerospace conference with speakers including Alice Bowman and 6 graduate students.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <p class="when mono">Mar 2026 — May 2026</p>
+          <h3>Organizer <span>@ Girls in STEM Aerospace Conference</span></h3>
+          <ul>
+            <li>Led the aerospace stream for high school and undergraduate students, including speakers, technical content and introductory teaching materials.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <p class="when mono">Sep 2023 — Present</p>
+          <h3>IB Tutor <span>@ GN Rising Excellence Institute</span></h3>
+          <ul>
+            <li>Tutor IB Chemistry, Physics and Math using custom problem sets and study plans built around each student's needs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Certifications</h3>
+      <div class="certs">
+        <div><strong>Level 1 High Power Rocketry</strong><span>UofTSTAR</span></div>
+        <div><strong>Level 2 High Power Rocketry</strong><span>UofTSTAR · 2026</span></div>
+        <div><strong>SolidWorks CAD</strong><span>University of Toronto · Nov 2026</span></div>
+        <div><strong>Basic Machining</strong><span>University of Toronto · Nov 2026</span></div>
+        <div><strong>Eco-Leader</strong><span>Regenesis · 120 hours · Aug 2026</span></div>
+        <div><strong>IB Bilingual Diploma</strong><span>Highest grade awards: English HL, Math AA SL, French HL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="label mono">04 · Skills</p>
+      <h2>Toolbox</h2>
+      <div class="skills">
+        <div><h4>CAD &amp; Design</h4><ul><li>SolidWorks</li><li>Fusion 360</li><li>AutoCAD</li><li>3D printing</li></ul></div>
+        <div><h4>Programming</h4><ul><li>Python (RDKit, data scraping)</li><li>MATLAB</li><li>Arduino</li></ul></div>
+        <div><h4>Analysis</h4><ul><li>OpenRocket</li><li>Excel modelling</li><li>Scientific data processing</li><li>Trade studies</li></ul></div>
+        <div><h4>Manufacturing</h4><ul><li>Lathe</li><li>Milling machine</li><li>Drill press</li><li>Machine shop safety</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="label mono">05 · Contact</p>
+      <h2>Let's build something</h2>
+      <p>I'm looking for co-op and internship roles in aerospace and mechanical engineering. I'd love to hear from you.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:anastasia.butnariu@mail.utoronto.ca">Email me</a>
+        <a class="btn" href="resume.pdf" target="_blank">Résumé</a>
+        <!-- Add your links, then delete the comment markers:
+        <a class="btn" href="https://linkedin.com/in/YOUR-PROFILE" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank">GitHub</a>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="mono">
+    © <span id="year"></span> Anastasia Butnariu · Built with HTML &amp; CSS · Hosted on GitHub Pages
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
