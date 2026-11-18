@@ -10,24 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f1115;
-      --surface: #171a21;
-      --border: #262b36;
-      --text: #e6e8ec;
-      --muted: #9aa3b2;
-      --accent: #f2a541;      /* change this to re-theme the whole site */
-      --radius: 10px;
+      --bg: #fbd0d5;          /* pink from the background artwork */
+      --surface: #ffffff;     /* white cards */
+      --border: #f3b8c4;      /* soft pink lines */
+      --text: #3b0d1c;        /* deep burgundy-black text */
+      --muted: #6e3346;       /* muted burgundy for secondary text */
+      --accent: #8b1e3f;      /* burgundy */
+      --pink: #f4a7bf;        /* pink highlight */
+      --radius: 12px;
       --max: 980px;
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #fafaf8;
-        --surface: #ffffff;
-        --border: #e3e5e8;
-        --text: #16181d;
-        --muted: #5b6372;
-        --accent: #c76a00;
-      }
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -43,10 +34,21 @@
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
     .mono { font-family: "IBM Plex Mono", monospace; }
 
+    /* Background artwork: wavy bands at the top and bottom of the page */
+    body {
+      background: var(--bg) url("./bg-top.png") top center / 100% auto no-repeat;
+    }
+    footer {
+      background: url("./bg-bottom.png") bottom center / 100% auto no-repeat;
+      padding-bottom: calc(28vw + 20px) !important;
+      border-top: none !important;
+    }
+    section { border-top: 1px solid rgba(139,30,63,.12); }
+
     /* Nav */
     nav {
       position: sticky; top: 0; z-index: 10;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      background: rgba(251,208,213,.6);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
@@ -57,16 +59,20 @@
     nav ul a:hover { color: var(--text); text-decoration: none; }
 
     /* Hero */
-    .hero { padding: 110px 0 80px; }
+    .hero { padding: calc(29vw - 40px) 0 80px; }
     .hero .tag { color: var(--accent); font-size: 14px; margin-bottom: 14px; }
     .hero h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+    .hero .hl { color: var(--accent); background: linear-gradient(transparent 62%, var(--pink) 62%); padding: 0 4px; }
+    .facts { align-self: start; }
     .hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin-top: 20px; }
     .btns { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 11px 20px; border-radius: var(--radius);
       font-weight: 500; font-size: 15px; border: 1px solid var(--border); color: var(--text);
     }
-    .btn.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn:not(.primary) { background: var(--surface); }
+    .btn:not(.primary):hover { border-color: var(--pink); }
     .btn:hover { text-decoration: none; transform: translateY(-1px); }
 
     /* Sections */
@@ -88,7 +94,7 @@
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card:hover { border-color: var(--pink); box-shadow: 0 8px 24px rgba(139,30,63,.12); transform: translateY(-3px); }
     .card .thumb {
       aspect-ratio: 16/9; background: var(--border); display: grid; place-items: center;
       color: var(--muted); font-size: 13px; object-fit: cover; width: 100%;
@@ -97,7 +103,7 @@
     .card h3 { font-size: 18px; margin-bottom: 8px; }
     .card p { color: var(--muted); font-size: 15px; flex: 1; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
-    .tags span { font-size: 12px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); }
+    .tags span { font-size: 12px; padding: 3px 9px; border-radius: 99px; background: #fde4ec; border: 1px solid var(--border); color: var(--accent); }
     .card .links { display: flex; gap: 16px; font-size: 14px; }
 
     /* Skills */
@@ -109,7 +115,7 @@
     .skills li::before { content: "▹ "; color: var(--accent); }
 
     /* Experience timeline */
-    .timeline { border-left: 2px solid var(--border); padding-left: 26px; }
+    .timeline { border-left: 2px solid var(--pink); padding-left: 26px; }
     .job { position: relative; margin-bottom: 36px; }
     .job::before {
       content: ""; position: absolute; left: -33px; top: 7px; width: 12px; height: 12px;
@@ -125,7 +131,7 @@
     .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 26px; }
     .contact .btns { justify-content: center; }
 
-    .card .thumb.t1 { background: linear-gradient(135deg, #8a3b1e, #d9774a); color: #fff; }
+    .card .thumb.t1 { background: linear-gradient(135deg, #5e0f29, #8b1e3f 45%, #f4a7bf); color: #fff; }
     .card .thumb.t2 { background: linear-gradient(135deg, #1e4d6b, #4fa3c7); color: #fff; }
     .card .thumb.t3 { background: linear-gradient(135deg, #2b2f3a, #5b6478); color: #fff; }
     .card .thumb.t4 { background: linear-gradient(135deg, #3d5a2a, #8fb069); color: #fff; }
@@ -156,7 +162,7 @@
     @media (max-width: 720px) {
       nav ul { display: none; }
       .about { grid-template-columns: 1fr; }
-      .hero { padding: 70px 0 50px; }
+      .hero { padding: calc(29vw + 10px) 0 50px; }
     }
   </style>
 </head>
@@ -180,7 +186,7 @@
   <header class="hero">
     <div class="wrap">
       <p class="tag mono">// Mechanical Engineering · University of Toronto</p>
-      <h1>Hi, I'm Anastasia.<br />I design for rockets, Mars and machines.</h1>
+      <h1>Hi, I'm <span class="hl">Anastasia</span>.<br />I design for rockets, Mars and machines.</h1>
       <p>Mechanical Engineering + Co-op student at U of T. I work on high-power rocketry, life-support systems for a crewed Mars base, and simulation code for plastic-degrading enzymes, and I restore motorcycles on the side.</p>
       <div class="btns">
         <a class="btn primary" href="#projects">View projects</a>
@@ -221,7 +227,7 @@
       <div class="projects">
 
         <article class="card">
-          <img class="thumb" src="images/rocket-garfi.jpg" alt="Anastasia with her Level 1 rocket, GARFI" style="object-position: center 35%">
+          <img class="thumb" src="./rocket-garfi.jpg" alt="Anastasia with her Level 1 rocket, GARFI" style="object-position: center 35%">
           <div class="body">
             <h3>Level 1 High-Power Rocket</h3>
             <p class="meta mono">Aero/Mech Member · UofTSTAR · 2025–present</p>
@@ -236,8 +242,8 @@
               <li>Designed and 3D-printed rocket components in Fusion 360. I've flown three high-power rockets.</li>
             </ul>
             <div class="shots">
-              <img src="images/openrocket-sim.jpg" alt="OpenRocket simulation of the L1 rocket">
-              <img src="images/rocket-team.jpg" alt="UofTSTAR team with rockets at launch day">
+              <img src="./openrocket-sim.jpg" alt="OpenRocket simulation of the L1 rocket">
+              <img src="./rocket-team.jpg" alt="UofTSTAR team with rockets at launch day">
             </div>
             <div class="tags"><span>OpenRocket</span><span>Fusion 360</span><span>Embedded</span><span>3D printing</span></div>
           </div>
@@ -259,7 +265,7 @@
         </article>
 
         <article class="card">
-          <img class="thumb" src="images/hairclip-display.jpg" alt="Display hairclip showing a status message" style="object-position: center 55%">
+          <img class="thumb" src="./hairclip-display.jpg" alt="Display hairclip showing a status message" style="object-position: center 55%">
           <div class="body">
             <h3>Wearable Display Hairclip</h3>
             <p class="meta mono">Personal project · ESP32</p>
@@ -269,14 +275,14 @@
               <li>Programmed the display and handled power, charging over USB-C.</li>
             </ul>
             <div class="shots">
-              <img src="images/hairclip-board.jpg" alt="Back of the hairclip: ESP32 board and LiPo battery">
+              <img src="./hairclip-board.jpg" alt="Back of the hairclip: ESP32 board and LiPo battery">
             </div>
             <div class="tags"><span>ESP32</span><span>Arduino</span><span>Wearables</span><span>LiPo power</span></div>
           </div>
         </article>
 
         <article class="card">
-          <img class="thumb" src="images/igem-jamboree.jpg" alt="iGEM Toronto booth at the Grand Jamboree in Paris" style="object-position: center 60%">
+          <img class="thumb" src="./igem-jamboree.jpg" alt="iGEM Toronto booth at the Grand Jamboree in Paris" style="object-position: center 60%">
           <div class="body">
             <h3>PETabite: Polymer Diffusion Simulation</h3>
             <p class="meta mono">Dry Lab &amp; Outreach · iGEM Toronto · 2026–present</p>
@@ -288,16 +294,16 @@
               <li>Wrote and directed the team's 2-minute video submission to the iGEM judges.</li>
             </ul>
             <div class="shots">
-              <img src="images/igem-simulation.jpg" alt="Simulated concentration profiles in a PETG fibre for diethyl phthalate and copper sulfate">
-              <img src="images/igem-assay.jpg" alt="Assay plate imaged under blue light in the lab">
-              <img src="images/igem-team.jpg" alt="iGEM Toronto team in front of the Toronto skyline">
+              <img src="./igem-simulation.jpg" alt="Simulated concentration profiles in a PETG fibre for diethyl phthalate and copper sulfate">
+              <img src="./igem-assay.jpg" alt="Assay plate imaged under blue light in the lab">
+              <img src="./igem-team.jpg" alt="iGEM Toronto team in front of the Toronto skyline">
             </div>
             <div class="tags"><span>Python</span><span>RDKit</span><span>Diffusion modelling</span><span>Data scraping</span><span>Design</span></div>
           </div>
         </article>
 
         <article class="card">
-          <img class="thumb" src="images/virago.jpg" alt="Restored 1989 Yamaha Virago" style="object-position: center 60%">
+          <img class="thumb" src="./virago.jpg" alt="Restored 1989 Yamaha Virago" style="object-position: center 60%">
           <div class="body">
             <h3>1989 Yamaha Virago Restoration</h3>
             <p class="meta mono">Personal project · Dec 2025 – Feb 2026</p>
@@ -336,7 +342,7 @@
             <li>Defined the role by finding gaps in academic support and creating structured resources to fill them.</li>
             <li>Built a twice-yearly training module for new tutors in the faculty's official tutoring program.</li>
           </ul>
-          <div class="shots"><img src="images/engsoc.jpg" alt="Engineering Society academic advocacy team"></div>
+          <div class="shots"><img src="./engsoc.jpg" alt="Engineering Society academic advocacy team"></div>
         </div>
         <div class="job">
           <p class="when mono">Aug 2026 — Sep 2026</p>
@@ -344,7 +350,7 @@
           <ul>
             <li>Co-organized an inter-university aerospace conference with speakers including Alice Bowman and 6 graduate students.</li>
           </ul>
-          <div class="shots"><img src="images/aiaa-group.jpg" alt="AIAA U of T x TMU conference organizers with guest speakers"><img src="images/aiaa-talk.jpg" alt="Alice Bowman presenting New Horizons mission operations"></div>
+          <div class="shots"><img src="./aiaa-group.jpg" alt="AIAA U of T x TMU conference organizers with guest speakers"><img src="./aiaa-talk.jpg" alt="Alice Bowman presenting New Horizons mission operations"></div>
         </div>
         <div class="job">
           <p class="when mono">Mar 2026 — May 2026</p>
@@ -352,7 +358,7 @@
           <ul>
             <li>Led the aerospace stream for high school and undergraduate students, including speakers, technical content and introductory teaching materials.</li>
           </ul>
-          <div class="shots"><img src="images/girls-in-stem.jpg" alt="Organizers at the Girls in STEM rocketry conference"></div>
+          <div class="shots"><img src="./girls-in-stem.jpg" alt="Organizers at the Girls in STEM rocketry conference"></div>
         </div>
         <div class="job">
           <p class="when mono">Sep 2023 — Present</p>
@@ -382,7 +388,7 @@
       <h2>Out in the field</h2>
       <div class="projects">
         <article class="card">
-          <img class="thumb" src="images/microplastics-sampling.jpg" alt="Sieving shoreline sediment for microplastics in a sampling quadrat">
+          <img class="thumb" src="./microplastics-sampling.jpg" alt="Sieving shoreline sediment for microplastics in a sampling quadrat">
           <div class="body">
             <h3>Microplastics Sampling</h3>
             <p class="meta mono">Volunteer · U of T Trash Team</p>
@@ -390,11 +396,11 @@
               <li>Collected shoreline sediment samples along Lake Ontario using standard quadrat sampling.</li>
               <li>Sieved, sorted and counted microplastic particles, and recorded the data for the team's research.</li>
             </ul>
-            <div class="shots"><img src="images/trash-team.jpg" alt="U of T Trash Team volunteers by the lake"></div>
+            <div class="shots"><img src="./trash-team.jpg" alt="U of T Trash Team volunteers by the lake"></div>
           </div>
         </article>
         <article class="card">
-          <img class="thumb" src="images/env-boat.jpg" alt="Program participants on a boat during field work" style="object-position: center 65%">
+          <img class="thumb" src="./env-boat.jpg" alt="Program participants on a boat during field work" style="object-position: center 65%">
           <div class="body">
             <h3>Environmental Field Program</h3>
             <p class="meta mono">Eco-Leader · Regenesis · 120 hours · 2026</p>
@@ -403,8 +409,8 @@
               <li>Learned how ecosystems are monitored and how that data shapes conservation work.</li>
             </ul>
             <div class="shots">
-              <img src="images/env-fish.jpg" alt="Fish survey tank beside the lake with species identification keys">
-              <img src="images/env-turtle.jpg" alt="Hatchling snapping turtle held in a hand">
+              <img src="./env-fish.jpg" alt="Fish survey tank beside the lake with species identification keys">
+              <img src="./env-turtle.jpg" alt="Hatchling snapping turtle held in a hand">
             </div>
           </div>
         </article>
