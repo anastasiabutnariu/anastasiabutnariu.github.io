@@ -153,6 +153,15 @@
     .stats b { display: block; font-size: 16px; color: var(--accent); }
     .stats span { font-size: 11px; color: var(--muted); }
     .job .shots { max-width: 520px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .design-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .design-grid figure { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 0; }
+    .design-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: zoom-in; }
+    .design-grid figcaption { font-size: 13px; color: var(--muted); padding: 10px 12px; }
+    .videos { display: flex; flex-wrap: wrap; gap: 18px; }
+    .videos figure { margin: 0; flex: 0 1 300px; }
+    .videos iframe { width: 100%; aspect-ratio: 9/16; border: 0; border-radius: var(--radius); background: #000; display: block; }
+    .videos figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .intro { color: var(--muted); max-width: 680px; margin: -12px 0 24px; }
     #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; place-items: center; z-index: 100; cursor: zoom-out; padding: 24px; }
     #lightbox.open { display: grid; }
     #lightbox img { max-width: 100%; max-height: 88vh; border-radius: 8px; }
@@ -177,6 +186,7 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#designs">Designs</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -432,10 +442,33 @@
     </div>
   </section>
 
+  <!-- ============ TECHNICAL DESIGNS / CAD ============ -->
+  <section id="designs">
+    <div class="wrap">
+      <p class="label mono">06 · Technical designs</p>
+      <h2>Technical designs &amp; CAD</h2>
+
+      <h3 class="sub" style="margin-top:0">MIE243: Hands-on teaching car</h3>
+      <p class="intro">For MIE243 (Mechanical Engineering Design), our team is designing a car that teaches students mechanical engineering through a hands-on approach. These are my hand drawings of its drivetrain: a 3-speed gearbox, differentials, motor and battery layout, and the dimensioned chassis.</p>
+      <div class="design-grid">
+        <figure><img src="images/mie243-drivetrain-dimensions.jpg" alt="Dimensioned top view of the drivetrain: 500 mm chassis, 3-speed gearbox with 1:1, 1:2 and 1:4 gear ratios"><figcaption>Dimensioned drivetrain layout with gear ratios</figcaption></figure>
+        <figure><img src="images/mie243-gearbox-3speed.jpg" alt="Chassis layout and 3D sketch of the 3-speed gearbox with neutral, 1, 2 and 3 shift gate"><figcaption>3-speed gearbox (N/1/2/3) and chassis</figcaption></figure>
+        <figure><img src="images/mie243-gearbox-detail.jpg" alt="Detailed drawing of the gearbox shafts, gears and shift forks"><figcaption>Gearbox shafts, gears and shift forks</figcaption></figure>
+        <figure><img src="images/mie243-car-layout.jpg" alt="Top view and 3D sketch of the car with motor, transmission, battery and differentials"><figcaption>Full car layout: motor, transmission, battery</figcaption></figure>
+      </div>
+
+      <h3 class="sub">CAD: MIE243 practical</h3>
+      <div class="videos">
+        <figure><iframe src="https://www.youtube.com/embed/rKORB2BY8Wg" title="MIE243 CAD practical, video 1" allowfullscreen loading="lazy"></iframe><figcaption>CAD model, part 1</figcaption></figure>
+        <figure><iframe src="https://www.youtube.com/embed/JzROtiGQxx8" title="MIE243 CAD practical, video 2" allowfullscreen loading="lazy"></iframe><figcaption>CAD model, part 2</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="contact">
     <div class="wrap">
-      <p class="label mono">06 · Contact</p>
+      <p class="label mono">07 · Contact</p>
       <h2>Let's build something</h2>
       <p>I'm looking for co-op and internship roles in aerospace and mechanical engineering. I'd love to hear from you.</p>
       <div class="btns">
@@ -457,7 +490,7 @@
 
   <script>
     const lb = document.getElementById("lightbox");
-    document.querySelectorAll("img.thumb, .shots img").forEach(img => {
+    document.querySelectorAll("img.thumb, .shots img, .design-grid img").forEach(img => {
       img.addEventListener("click", () => {
         lb.querySelector("img").src = img.src;
         lb.querySelector("p").textContent = img.alt;
